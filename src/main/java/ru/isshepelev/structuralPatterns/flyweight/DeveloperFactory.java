@@ -1,0 +1,26 @@
+package ru.isshepelev.structuralPatterns.flyweight;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class DeveloperFactory {
+    private static final Map<String, Developer> developers = new HashMap<>();
+
+    public Developer getDeveloperBySpecialty(String specialty) {
+        Developer developer = developers.get(specialty);
+        if (developer == null) {
+            switch (specialty) {
+                case "java":
+                    System.out.println("нанимаем java разработчика");
+                    developer = new JavaDeveloper();
+                    break;
+                case "c++":
+                    System.out.println("нанимаем C++ разработчика");
+                    developer = new CppDeveloper();
+                    break;
+            }
+            developers.put(specialty, developer);
+        }
+        return developer;
+    }
+}
